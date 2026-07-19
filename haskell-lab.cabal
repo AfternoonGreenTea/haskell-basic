@@ -1,0 +1,28 @@
+cabal-version:   3.16
+name:            haskell-lab
+version:         0.1.0.0
+license:         NONE
+author:          Unknown
+maintainer:      Unknown
+build-type:      Simple
+extra-doc-files: CHANGELOG.md
+
+common warnings
+    ghc-options: -Wall
+
+library
+    import:           warnings
+    exposed-modules:  MyLib
+    build-depends:    base ^>=4.20.2.0
+    hs-source-dirs:   src
+    default-language: Haskell2010
+
+executable haskell-lab
+    import:           warnings
+    main-is:          Main.hs
+    build-depends:
+        base ^>=4.20.2.0,
+        haskell-lab
+
+    hs-source-dirs:   app
+    default-language: Haskell2010
