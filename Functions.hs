@@ -82,3 +82,20 @@ areaOfRing r1 r2 =
     let outer = pi * r1 * r1
         inner = pi * r2 * r2
     in outer - inner
+
+clamp :: Int -> Int -> Int -> Int
+clamp lo hi x
+  | x < lo    = lo
+  | x > hi    = hi
+  | otherwise = x
+
+
+fizzBuzz :: Int -> String
+fizzBuzz n
+  | n `mod` 15 == 0 = "FizzBuzz"
+  | n `mod` 3 == 0  = "Fizz"
+  | n `mod` 5 == 0  = "Buzz"
+  | otherwise       = show n
+
+maxOf3 :: Int -> Int -> Int -> Int
+maxOf3 a b c = max a (max b c)
