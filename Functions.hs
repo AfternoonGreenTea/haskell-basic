@@ -54,3 +54,19 @@ bmiAdvice height weight
 isZero :: Int -> Bool
 isZero 0 = True
 isZero _ = False
+
+describeList :: [a] -> String
+describeList []      = "empty"
+describeList [_]     = "singleton"
+describeList [_,_]   = "two elements"
+describeList (_:_:_) = "longer"
+
+dayName :: Int -> String
+dayName 0 = "Sunday"
+dayName 1 = "Monday"
+dayName 2 = "Tuesday"
+dayName 3 = "Wednesday"
+dayName 4 = "Thursday"
+dayName 5 = "Friday"
+dayName 6 = "Saturday"
+dayName _ = "Invalid day"
