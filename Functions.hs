@@ -70,3 +70,15 @@ dayName 4 = "Thursday"
 dayName 5 = "Friday"
 dayName 6 = "Saturday"
 dayName _ = "Invalid day"
+
+cylinderVolume :: Double -> Double -> Double
+cylinderVolume r h =
+    sideArea * h
+    where
+        sideArea = 2 * pi * r * h
+
+areaOfRing :: Double -> Double -> Double
+areaOfRing r1 r2 =
+    let outer = pi * r1 * r1
+        inner = pi * r2 * r2
+    in outer - inner
