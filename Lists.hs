@@ -30,3 +30,6 @@ elem' _ [] = False
 elem' y (x:xs)
   | y == x = True
   | otherwise = elem' y xs
+
+doubleAll :: [Int] -> [Int]
+doubleAll xs = map (* 2) xs
