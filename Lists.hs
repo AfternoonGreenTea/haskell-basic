@@ -24,3 +24,9 @@ length' (_:xs) = 1 + length' xs
 product' :: [Int] -> Int
 product' [] = 1
 product' (x:xs) = x * product' xs
+
+elem' :: Eq a => a -> [a] -> Bool
+elem' _ [] = False
+elem' y (x:xs)
+  | y == x = True
+  | otherwise = elem' y xs
