@@ -56,3 +56,21 @@ lengthFold = foldr' (\_ n -> n + 1) 0
 
 mapFold :: (a -> b) -> [a] -> [b]
 mapFold f = foldr (\x acc -> f x : acc) []
+
+average :: [Double] -> Double
+average [] = 0
+average xs = sum xs / fromIntegral (length xs)
+
+unique :: Eq a => [a] -> [a]
+unique [] = []
+unique (x:xs)
+  | x `elem` xs' = xs'
+  | otherwise = x : xs'
+  where
+    xs' = unique xs
+
+wordCount :: String -> Int
+wordCount = length . words
+
+sumDoubledIf :: Int -> [Int] -> Int
+sumDoubledIf n = sum . map (* 2) . filter (>= n)
