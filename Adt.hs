@@ -44,4 +44,24 @@ describeHead xs =
   case safeHead xs of
     Nothing -> "Empty list"
     Just x -> "head is" ++ show x
-  
+
+fromMaybe' :: a -> Maybe a -> a
+fromMaybe' def Nothing = def
+fromMaybe' _ (Just x) = x
+
+safeIndex :: Int -> [a] -> Maybe a
+safeIndex n xs
+  | n < 0 = Nothing
+  | otherwise = go n xs
+  where
+    go _ [] = Nothing
+    go 0 (x:_) = Just x
+    go i (_:ys) = go (i - 1) ys
+
+data DivError = DivisionByZero | NegativeInput deriving (Show, Eq)
+
+safeDivE :: Double -> Double -> Either DivError Double
+safeDivE _ 0 = Left DivisionByZero
+safeDivE x y
+  | x < 0 || y < 0 = Left NegativeInput
+  | otherwise = Right (x / y)
