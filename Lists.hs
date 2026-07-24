@@ -47,3 +47,12 @@ filter' p (x:xs)
   | p x = x : filter' p xs
   | otherwise = filter' p xs
 
+foldr' :: (a -> b -> b) -> b -> [a] -> b
+foldr' _ z [] = z
+foldr' f z (x:xs) = f x (foldr' f z xs)
+
+lengthFold :: [a] -> Int
+lengthFold = foldr' (\_ n -> n + 1) 0
+
+mapFold :: (a -> b) -> [a] -> [b]
+mapFold f = foldr (\x acc -> f x : acc) []
