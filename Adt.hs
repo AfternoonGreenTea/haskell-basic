@@ -30,3 +30,18 @@ alice = User
 
 rename :: String -> User -> User
 rename newName user = user { userName = newName }
+
+safeHead :: [a] -> Maybe a
+safeHead [] = Nothing
+safeHead (x:_) = Just x
+
+safeDiv :: Double -> Double -> Maybe Double
+safeDiv _ 0 = Nothing
+safeDiv x y = Just(x / y)
+
+describeHead :: Show a => [a] -> String
+describeHead xs =
+  case safeHead xs of
+    Nothing -> "Empty list"
+    Just x -> "head is" ++ show x
+  
