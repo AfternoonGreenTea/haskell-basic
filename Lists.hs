@@ -33,3 +33,6 @@ elem' y (x:xs)
 
 doubleAll :: [Int] -> [Int]
 doubleAll xs = map (* 2) xs
+
+evens :: [Int] -> [Int]
+evens xs = filter even xs
