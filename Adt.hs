@@ -27,3 +27,6 @@ alice = User
   , userName = "alice"
   , userEmail = "alice@example.com"
   }
+
+rename :: String -> User -> User
+rename newName user = user { userName = newName }
