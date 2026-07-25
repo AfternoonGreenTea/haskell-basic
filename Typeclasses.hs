@@ -34,3 +34,9 @@ instance Printable Color where
 
 printAll :: Printable a => [a] -> [String]
 printAll = map toString
+
+class Size a where
+  sizeOf :: a -> Int
+
+instance Size [a] where
+  sizeOf = length
