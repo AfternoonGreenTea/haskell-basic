@@ -1,3 +1,7 @@
+import Data.Char (isDigit)
+import Data.List (sortBy)
+import Data.Ord (comparing, Down(Down))
+
 data Color = Red | Green | Blue
   deriving (Show, Eq)
 
@@ -65,3 +69,41 @@ safeDivE _ 0 = Left DivisionByZero
 safeDivE x y
   | x < 0 || y < 0 = Left NegativeInput
   | otherwise = Right (x / y)
+
+data PasswordError = TooShort | NoDigit deriving (Show, Eq)
+validatePassword :: String -> Either PasswordError String
+validatePassword password
+  | length password < 8     = Left TooShort
+  | not (any isDigit password) = Left NoDigit
+  | otherwise               = Right password
+
+newtype Kilometers = Kilometers Double deriving (Show)
+newtype Miles = Miles Double deriving (Show)
+
+toMiles :: Kilometers -> Miles
+toMiles (Kilometers km) = Miles (km * 0.621371)
+
+data Priority = Low | Medium | High deriving(Show, Eq, Ord)
+data Task = Task
+  { taskId :: Int
+  , taskTitle :: String
+  , taskDone :: Bool
+  , taskPriority :: Priority
+  } deriving (Show, Eq)
+
+pending :: [Task] -> [Task]
+pending = filter (not . taskDone)
+
+sortByPriority :: [Task] -> [Task]
+sortByPriority = sortBy (comparing (Down . taskPriority))
+
+findTask :: Int -> [Task] -> Maybe Task
+findTask tid [] = Nothing
+findTask tid (t:ts)
+  | taskId t == tid = Just t
+  | otherwise = findTask tid ts
+
+createTask :: Int -> String -> Priority -> Either String Task
+createTask tid title priority
+  | null title = Left "empty title"
+  | otherwise = Right (Task tid title False priority)
