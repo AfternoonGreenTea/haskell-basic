@@ -40,3 +40,6 @@ class Size a where
 
 instance Size [a] where
   sizeOf = length
+
+addMaybes :: Maybe Int -> Maybe Int -> Maybe Int
+addMaybes mx my = (+) <$> mx <*> my
