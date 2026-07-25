@@ -1,3 +1,6 @@
+import Data.Char (toUpper)
+import Text.Read (readMaybe)
+
 isMember :: Eq a => a -> [a] -> Bool
 isMember _ [] = False
 isMember x (y:xs)
@@ -43,3 +46,29 @@ instance Size [a] where
 
 addMaybes :: Maybe Int -> Maybe Int -> Maybe Int
 addMaybes mx my = (+) <$> mx <*> my
+
+shoutMaybe :: Maybe String -> Maybe String
+shoutMaybe = fmap (map toUpper)
+
+addM :: Maybe Int -> Maybe Int -> Maybe Int
+addM mx my = (+) <$> mx <*> my
+
+parseAndDouble :: String -> Maybe Int
+parseAndDouble s = do
+  n <- readMaybe s
+  pure (n * 2)
+
+data Option a = None | Some a deriving (Show)
+
+instance Functor Option where
+  fmap _ None = None
+  fmap f (Some x) = Some (f x)
+
+instance Applicative Option where
+  pure = Some
+  None <*> _ = None
+  Some f <*> mx = fmap f mx
+
+instance Monad Option where
+  None >>= _ = None
+  Some x >>= f = f x
